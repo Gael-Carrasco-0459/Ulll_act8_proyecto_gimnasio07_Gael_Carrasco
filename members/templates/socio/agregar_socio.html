@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="bi bi-person-plus-fill"></i> Agregar Nuevo Socio</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'agregar_socio' %}">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" name="nombre" class="form-control" placeholder="Ej: Juan" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Apellido:</label>
+                            <input type="text" name="apellido" class="form-control" placeholder="Ej: Pérez" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha de Nacimiento:</label>
+                            <input type="date" name="fecha_nacimiento" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Género:</label>
+                            <select name="genero" class="form-select" required>
+                                <option value="" selected disabled>Seleccione...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Dirección:</label>
+                        <input type="text" name="direccion" class="form-control" placeholder="Calle y número" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono:</label>
+                            <input type="text" name="telefono" class="form-control" placeholder="Ej: 555-1234" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email:</label>
+                            <input type="email" name="email" class="form-control" placeholder="correo@ejemplo.com" required>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h5 class="text-secondary">Datos de Membresía</h5>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Membresía:</label>
+                            <select name="membresia" class="form-select" required>
+                                <option value="" selected disabled>Seleccione Membresía...</option>
+                                {% for m in membresias %}
+                                    <option value="{{ m.id }}">{{ m.tipo_membresia }} - ${{ m.costo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha Vencimiento:</label>
+                            <input type="date" name="fecha_vencimiento_membresia" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="{% url 'ver_socios' %}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Guardar Socio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Actualizar Membresía</h3>
+    <form action="{% url 'realizar_actualizacion_membresia' membresia.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Tipo:</label><input type="text" name="tipo_membresia" value="{{ membresia.tipo_membresia }}" class="form-control"></div>
+        <div class="mb-3"><label>Descripción:</label><textarea name="descripcion" class="form-control">{{ membresia.descripcion }}</textarea></div>
+        <div class="mb-3"><label>Costo:</label><input type="number" step="0.01" name="costo" value="{{ membresia.costo }}" class="form-control"></div>
+        <div class="mb-3"><label>Duración:</label><input type="number" name="duracion_meses" value="{{ membresia.duracion_meses }}" class="form-control"></div>
+        <div class="mb-3"><label>Beneficios:</label><textarea name="beneficios" class="form-control">{{ membresia.beneficios }}</textarea></div>
+        <div class="mb-3"><label>Sesiones:</label><input type="number" name="num_sesiones_incluidas" value="{{ membresia.num_sesiones_incluidas }}" class="form-control"></div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="es_activa" class="form-check-input" {% if membresia.es_activa %}checked{% endif %}>
+            <label class="form-check-label">¿Activa?</label>
+        </div>
+        <button type="submit" class="btn btn-warning"><i class="bi bi-pencil"></i> Actualizar</button>
+    </form>
+</div>
+{% endblock %}

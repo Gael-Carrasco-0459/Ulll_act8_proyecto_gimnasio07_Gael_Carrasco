@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0"><i class="bi bi-pencil-square"></i> Actualizar Socio</h3>
+            </div>
+            <div class="card-body">
+                <!-- Apunta a la URL de 'realizar_actualizacion' -->
+                <form method="POST" action="{% url 'realizar_actualizacion_socio' socio.id %}">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" name="nombre" value="{{ socio.nombre }}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Apellido:</label>
+                            <input type="text" name="apellido" value="{{ socio.apellido }}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha de Nacimiento:</label>
+                            <!-- Importante: formatear la fecha a Y-m-d para que el input la lea -->
+                            <input type="date" name="fecha_nacimiento" value="{{ socio.fecha_nacimiento|date:'Y-m-d' }}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Género:</label>
+                            <select name="genero" class="form-select" required>
+                                <option value="M" {% if socio.genero == 'M' %}selected{% endif %}>Masculino</option>
+                                <option value="F" {% if socio.genero == 'F' %}selected{% endif %}>Femenino</option>
+                                <option value="O" {% if socio.genero == 'O' %}selected{% endif %}>Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Dirección:</label>
+                        <input type="text" name="direccion" value="{{ socio.direccion }}" class="form-control" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono:</label>
+                            <input type="text" name="telefono" value="{{ socio.telefono }}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email:</label>
+                            <input type="email" name="email" value="{{ socio.email }}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h5 class="text-secondary">Actualizar Membresía</h5>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Membresía:</label>
+                            <select name="membresia" class="form-select">
+                                <option value="">-- Sin Membresía --</option>
+                                {% for m in membresias %}
+                                    <option value="{{ m.id }}" {% if socio.membresia and socio.membresia.id == m.id %}selected{% endif %}>
+                                        {{ m.tipo_membresia }} - ${{ m.costo }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha Vencimiento:</label>
+                            <input type="date" name="fecha_vencimiento_membresia" value="{{ socio.fecha_vencimiento_membresia|date:'Y-m-d' }}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="{% url 'ver_socios' %}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-warning"><i class="bi bi-check-circle"></i> Actualizar Datos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

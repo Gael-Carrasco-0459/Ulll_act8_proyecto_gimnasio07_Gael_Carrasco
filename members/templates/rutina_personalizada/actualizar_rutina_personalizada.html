@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Actualizar Rutina</h3>
+    <form action="{% url 'realizar_actualizacion_rutina_personalizada' rutina.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Socio:</label>
+            <select name="socio" class="form-select">
+                {% for s in socios %}
+                <option value="{{ s.id }}" {% if rutina.socio.id == s.id %}selected{% endif %}>{{ s.nombre }} {{ s.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Entrenador:</label>
+            <select name="entrenador" class="form-select">
+                {% for e in entrenadores %}
+                <option value="{{ e.id }}" {% if rutina.entrenador.id == e.id %}selected{% endif %}>{{ e.nombre }} {{ e.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Objetivo:</label><input type="text" name="objetivo" value="{{ rutina.objetivo }}" class="form-control"></div>
+        <div class="mb-3"><label>Ejercicios:</label><textarea name="descripcion_ejercicios" class="form-control" rows="4">{{ rutina.descripcion_ejercicios }}</textarea></div>
+        <div class="mb-3"><label>Frecuencia:</label><input type="text" name="frecuencia" value="{{ rutina.frecuencia }}" class="form-control"></div>
+        <div class="mb-3"><label>Duración (Semanas):</label><input type="number" name="duracion_semanas" value="{{ rutina.duracion_semanas }}" class="form-control"></div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

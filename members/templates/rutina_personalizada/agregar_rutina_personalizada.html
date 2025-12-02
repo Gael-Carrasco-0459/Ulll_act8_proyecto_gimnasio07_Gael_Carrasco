@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Crear Rutina Personalizada</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Socio:</label>
+            <select name="socio" class="form-select">
+                {% for s in socios %}
+                <option value="{{ s.id }}">{{ s.nombre }} {{ s.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Entrenador Asignado:</label>
+            <select name="entrenador" class="form-select">
+                {% for e in entrenadores %}
+                <option value="{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Objetivo:</label><input type="text" name="objetivo" class="form-control"></div>
+        <div class="mb-3"><label>Descripción Ejercicios:</label><textarea name="descripcion_ejercicios" class="form-control" rows="4"></textarea></div>
+        <div class="mb-3"><label>Frecuencia:</label><input type="text" name="frecuencia" class="form-control" placeholder="Ej: 3 veces por semana"></div>
+        <div class="mb-3"><label>Duración (Semanas):</label><input type="number" name="duracion_semanas" class="form-control"></div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}

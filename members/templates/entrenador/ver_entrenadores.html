@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Entrenadores</h3>
+<a href="{% url 'agregar_entrenador' %}" class="btn btn-primary mb-3">Agregar</a>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr><th>Nombre</th><th>Especialidad</th><th>Email</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+        {% for e in entrenadores %}
+        <tr>
+            <td>{{ e.nombre }} {{ e.apellido }}</td>
+            <td>{{ e.especialidad }}</td>
+            <td>{{ e.email }}</td>
+            <td>
+                <a href="{% url 'actualizar_entrenador' e.id %}" class="btn btn-info btn-sm">Editar</a>
+                <a href="{% url 'borrar_entrenador' e.id %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar?');">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

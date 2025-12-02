@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Actualizar Clase</h3>
+    <form action="{% url 'realizar_actualizacion_clase' clase.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Nombre:</label><input type="text" name="nombre_clase" value="{{ clase.nombre_clase }}" class="form-control"></div>
+        <div class="mb-3"><label>Descripción:</label><textarea name="descripcion" class="form-control">{{ clase.descripcion }}</textarea></div>
+        <div class="mb-3"><label>Horario:</label><input type="text" name="horario" value="{{ clase.horario }}" class="form-control"></div>
+        <div class="mb-3"><label>Duración:</label><input type="number" name="duracion_minutos" value="{{ clase.duracion_minutos }}" class="form-control"></div>
+        <div class="mb-3"><label>Entrenador:</label>
+            <select name="entrenador" class="form-select">
+                {% for e in entrenadores %}
+                <option value="{{ e.id }}" {% if clase.entrenador.id == e.id %}selected{% endif %}>{{ e.nombre }} {{ e.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Cupo:</label><input type="number" name="cupo_maximo" value="{{ clase.cupo_maximo }}" class="form-control"></div>
+        <div class="mb-3"><label>Costo:</label><input type="number" step="0.01" name="costo_clase" value="{{ clase.costo_clase }}" class="form-control"></div>
+        <div class="mb-3"><label>Dificultad:</label><input type="text" name="nivel_dificultad" value="{{ clase.nivel_dificultad }}" class="form-control"></div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

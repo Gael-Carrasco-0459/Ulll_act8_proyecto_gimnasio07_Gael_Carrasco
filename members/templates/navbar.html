@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Sistema de Administración Gimnasio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+                
+                <!-- Membresía -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-card-checklist"></i> Membresía</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_membresia' %}">Agregar membresía</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_membresias' %}">Ver membresía</a></li>
+                    </ul>
+                </li>
+
+                <!-- Socio -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-people-fill"></i> Socio</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_socio' %}">Agregar socio</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_socios' %}">Ver socio</a></li>
+                    </ul>
+                </li>
+
+                <!-- Entrenador -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-badge-fill"></i> Entrenador</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_entrenador' %}">Agregar entrenador</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_entrenadores' %}">Ver entrenadores</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Clase -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-calendar-event"></i> Clase</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_clase' %}">Agregar clase</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_clases' %}">Ver clases</a></li>
+                    </ul>
+                </li>
+
+                <!-- Reserva Clase, Pago, Rutina (Repetir estructura cambiando URLs e Iconos) -->
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-bookmark-check"></i> Reservas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_reserva_clase' %}">Agregar reserva</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_reservas_clase' %}">Ver reserva</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-bookmark-check"></i> Rutina personalizada</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_rutina_personalizada' %}">Agregar rutina</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_rutinas_personalizadas' %}">Ver rutina</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

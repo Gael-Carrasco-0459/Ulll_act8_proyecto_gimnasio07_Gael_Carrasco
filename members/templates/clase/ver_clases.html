@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Clases</h3>
+<a href="{% url 'agregar_clase' %}" class="btn btn-primary mb-3">Agregar</a>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr><th>Clase</th><th>Horario</th><th>Entrenador</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+        {% for c in clases %}
+        <tr>
+            <td>{{ c.nombre_clase }}</td>
+            <td>{{ c.horario }}</td>
+            <td>{{ c.entrenador }}</td>
+            <td>
+                <a href="{% url 'actualizar_clase' c.id %}" class="btn btn-info btn-sm">Editar</a>
+                <a href="{% url 'borrar_clase' c.id %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar?');">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

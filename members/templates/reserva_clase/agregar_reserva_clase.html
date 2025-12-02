@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Nueva Reserva</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Socio:</label>
+            <select name="socio" class="form-select">
+                {% for s in socios %}
+                <option value="{{ s.id }}">{{ s.nombre }} {{ s.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Clase:</label>
+            <select name="clase" class="form-select">
+                {% for c in clases %}
+                <option value="{{ c.id }}">{{ c.nombre_clase }} ({{ c.horario }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Estado:</label>
+            <select name="estado_reserva" class="form-select">
+                <option value="Confirmada">Confirmada</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Cancelada">Cancelada</option>
+            </select>
+        </div>
+        <div class="mb-3"><label>Comentarios:</label><textarea name="comentarios" class="form-control"></textarea></div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}

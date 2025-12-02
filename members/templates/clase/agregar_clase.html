@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Agregar Clase</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Nombre Clase:</label><input type="text" name="nombre_clase" class="form-control"></div>
+        <div class="mb-3"><label>Descripción:</label><textarea name="descripcion" class="form-control"></textarea></div>
+        <div class="mb-3"><label>Horario:</label><input type="text" name="horario" class="form-control"></div>
+        <div class="mb-3"><label>Duración (min):</label><input type="number" name="duracion_minutos" class="form-control"></div>
+        <div class="mb-3"><label>Entrenador:</label>
+            <select name="entrenador" class="form-select">
+                {% for e in entrenadores %}
+                <option value="{{ e.id }}">{{ e.nombre }} {{ e.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Cupo Máximo:</label><input type="number" name="cupo_maximo" class="form-control"></div>
+        <div class="mb-3"><label>Costo:</label><input type="number" step="0.01" name="costo_clase" class="form-control"></div>
+        <div class="mb-3"><label>Dificultad:</label><input type="text" name="nivel_dificultad" class="form-control"></div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}

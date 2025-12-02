@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Actualizar Reserva</h3>
+    <form action="{% url 'realizar_actualizacion_reserva_clase' reserva.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Socio:</label>
+            <select name="socio" class="form-select">
+                {% for s in socios %}
+                <option value="{{ s.id }}" {% if reserva.socio.id == s.id %}selected{% endif %}>{{ s.nombre }} {{ s.apellido }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Clase:</label>
+            <select name="clase" class="form-select">
+                {% for c in clases %}
+                <option value="{{ c.id }}" {% if reserva.clase.id == c.id %}selected{% endif %}>{{ c.nombre_clase }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3"><label>Estado:</label>
+            <select name="estado_reserva" class="form-select">
+                <option value="Confirmada" {% if reserva.estado_reserva == 'Confirmada' %}selected{% endif %}>Confirmada</option>
+                <option value="Pendiente" {% if reserva.estado_reserva == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+                <option value="Cancelada" {% if reserva.estado_reserva == 'Cancelada' %}selected{% endif %}>Cancelada</option>
+            </select>
+        </div>
+        <div class="mb-3"><label>Comentarios:</label><textarea name="comentarios" class="form-control">{{ reserva.comentarios }}</textarea></div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h3>Actualizar Entrenador</h3>
+    <form action="{% url 'realizar_actualizacion_entrenador' entrenador.id %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Nombre:</label><input type="text" name="nombre" value="{{ entrenador.nombre }}" class="form-control"></div>
+        <div class="mb-3"><label>Apellido:</label><input type="text" name="apellido" value="{{ entrenador.apellido }}" class="form-control"></div>
+        <div class="mb-3"><label>Especialidad:</label><input type="text" name="especialidad" value="{{ entrenador.especialidad }}" class="form-control"></div>
+        <div class="mb-3"><label>Teléfono:</label><input type="text" name="telefono" value="{{ entrenador.telefono }}" class="form-control"></div>
+        <div class="mb-3"><label>Email:</label><input type="email" name="email" value="{{ entrenador.email }}" class="form-control"></div>
+        <div class="mb-3"><label>Fecha Contratación:</label><input type="date" name="fecha_contratacion" value="{{ entrenador.fecha_contratacion|date:'Y-m-d' }}" class="form-control"></div>
+        <div class="mb-3"><label>Salario:</label><input type="number" step="0.01" name="salario" value="{{ entrenador.salario|stringformat:'.2f' }}" class="form-control"></div>
+        <div class="mb-3"><label>Certificado:</label><input type="text" name="certificado" value="{{ entrenador.certificado }}" class="form-control"></div>
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+    </form>
+</div>
+{% endblock %}
